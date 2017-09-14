@@ -78,6 +78,7 @@ class SinglePlayerActivity : AppCompatActivity() {
                 board_cell[cell - 1] = 1
                 check_winner()
                 computer_logic()
+                changeActivePlayerText()
             }
             2 -> {
                 drawable.setStroke(2, Color.GREEN)
@@ -89,6 +90,7 @@ class SinglePlayerActivity : AppCompatActivity() {
                 var cell = GetCell().id(selected)
                 board_cell[cell - 1] = 2
                 check_winner()
+                changeActivePlayerText()
             }
         }
     }

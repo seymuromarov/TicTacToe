@@ -4,6 +4,6 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="player1SignColor">#fb0230</color>
-    <color name="player2SignColor">#96a5f2</color>
+    <color name="player2SignColor">#394998</color>
     <color name="defaultStrokeColor">#831ae4</color>
 </resources>

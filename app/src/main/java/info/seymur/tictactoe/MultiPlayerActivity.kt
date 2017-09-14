@@ -36,11 +36,6 @@ class MultiPlayerActivity : AppCompatActivity() {
         setContentView(R.layout.activity_game)
         val intent = intent
         player1Sign = intent.getStringExtra("sign")
-        try {
-            activePlayer = intent.getIntExtra("turn", 1)
-        } catch (e: Exception) {
-            toast(e.message.toString())
-        }
         changeActivePlayerText()
         when (player1Sign) {
             "X" -> {
@@ -55,6 +50,7 @@ class MultiPlayerActivity : AppCompatActivity() {
         reset.setOnClickListener {
             reset()
         }
+        button_add()
     }
 
     fun changeActivePlayerText() {
@@ -89,13 +85,45 @@ class MultiPlayerActivity : AppCompatActivity() {
         }
     }
 
-    private fun reset() {
+//    private fun reset() {
+//
+//        val intent = Intent(applicationContext, MultiPlayerActivity::class.java)
+//        intent.putExtra("sign", player1Sign)
+//        intent.putExtra("turn", activePlayer)
+//        startActivity(intent);
+//        finish()
+//    }
 
-        val intent = Intent(applicationContext, MultiPlayerActivity::class.java)
-        intent.putExtra("sign", player1Sign)
-        intent.putExtra("turn", activePlayer)
-        startActivity(intent);
-        finish()
+    fun game_over() {
+        over = true
+        for (item in Buttons) {
+            item.isEnabled = false
+        }
+    }
+
+    fun reset() {
+        over = false
+        for (item in Buttons) {
+            item.isEnabled = true
+            item.text = ""
+            var drawable = item.background as GradientDrawable
+            drawable.setStroke(2, Color.BLUE)
+        }
+        for (i in 0..8) {
+            board_cell[i] = 0
+        }
+    }
+
+    fun button_add() {
+        Buttons.add(b1)
+        Buttons.add(b2)
+        Buttons.add(b3)
+        Buttons.add(b4)
+        Buttons.add(b5)
+        Buttons.add(b6)
+        Buttons.add(b7)
+        Buttons.add(b8)
+        Buttons.add(b9)
     }
 
     private fun check_winner() {
@@ -104,12 +132,12 @@ class MultiPlayerActivity : AppCompatActivity() {
             1 -> {
                 TastyToast.makeText(applicationContext, "Player 1 won the game", TastyToast.LENGTH_LONG,
                         TastyToast.INFO)
-                reset()
+                game_over()
             }
             2 -> {
                 TastyToast.makeText(applicationContext, "Player 2 won the game", TastyToast.LENGTH_LONG,
                         TastyToast.INFO)
-                reset()
+                game_over()
             }
         }
     }
